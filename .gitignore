@@ -1,5 +1,7 @@
 /.vscode
 functions/node_modules
+functions/.runtimeconfig.json
+functions/service-account-credentials.json
 firebase-debug.log
 npm-debug.log
 package-lock.json

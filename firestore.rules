@@ -1,3 +1,4 @@
+//TODO: Lock down the rules more
 service cloud.firestore {
   match /databases/{database}/documents {
     match /accounts/{account} {
@@ -6,6 +7,14 @@ service cloud.firestore {
     }
     match /institutionTokens/{institutionToken} {
       allow read: if false; //Clients don't need to ever read their institutionTokens
+      allow write: if request.auth.uid != null;
+    }
+    match /transactions/{transaction} {
+      allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    }
+    match /chats/{chat} {
+      allow read: if request.auth.uid != null;
       allow write: if request.auth.uid != null;
     }
   }
