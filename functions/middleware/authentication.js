@@ -1,11 +1,6 @@
+var firebaseAdmin = require('../repository/initialize-firebase');
 
-var admin = require("firebase-admin");
-const functions = require('firebase-functions');
-var serviceAccount = require("./service-account-credentials.json");
-
-const authorizationHeader = 'Authorization'
-
-admin.initializeApp(functions.config().firebase);
+const authorizationHeader = 'Authorization';
 
 function isAuthenticated(req, res, next) {
 
@@ -14,7 +9,7 @@ function isAuthenticated(req, res, next) {
   }
   else {
 
-    admin.auth().verifyIdToken(req.header(authorizationHeader))
+    firebaseAdmin.auth().verifyIdToken(req.header(authorizationHeader))
       .then((decodedToken) => {
         res.locals.userId = decodedToken.uid; //Set the userId var so it can be used further down the chain
         return next();

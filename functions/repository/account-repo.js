@@ -1,11 +1,20 @@
-function AccountRepo() {
+// var admin = require("firebase-admin");
+// var functions = require('firebase-functions');
 
-}
+// admin.initializeApp(functions.config().firebase);
 
-AccountRepo.prototype.userHasInstitution = function (userId, institutionId) {
+// const ACCOUNT_COLLECTION_REF = "accounts";
 
-}
+// function AccountRepo() {
+//     this.db = admin.firestore();
+// }
 
-AccountRepo.prototype.getMostRecentAccountsDocument = function(userId)
+// AccountRepo.prototype.userHasInstitution = function (userId, institutionId) {
 
-module.exports = AccountRepo;
+// }
+
+// AccountRepo.prototype.getMostRecentAccountsDocument = function(userId) {
+//     accountsCollection = db.collection(ACCOUNT_COLLECTION_REF);
+// }
+
+// module.exports = AccountRepo;
