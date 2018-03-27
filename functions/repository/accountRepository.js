@@ -3,7 +3,6 @@ var dbConstants = require('../config/dbConstants');
 var FirestoreQueryError = require('../errors/FirestoreQueryError');
 
 const DB = firebaseAdmin.firestore();
-const ACCOUNT_COLLECTION_REF = "accounts";
 
 
 function userHasInstitution(userId, institutionId, callback) {
@@ -28,7 +27,7 @@ function userHasInstitution(userId, institutionId, callback) {
 }
 
 function getMostRecentAccountsDocument(userId, callback) {
-    let accountCollection = DB.collection(ACCOUNT_COLLECTION_REF);
+    let accountCollection = DB.collection(dbConstants.ACCOUNT_COLLECTION_REF);
     let query = accountCollection.where(dbConstants.USER_ID_REF, '==', userId)
     .orderBy(dbConstants.CREATED_AT_REF, dbConstants.ORDER_DESC).limit(1);
 
@@ -47,7 +46,17 @@ function getMostRecentAccountsDocument(userId, callback) {
     });
 }
 
+function addInstitution(data, userId, callback) {
+    console.log('In addInstitution: ');
+    console.log('Data is: '+JSON.stringify(data));
+    console.log('UserId is: '+userId);
+
+    callback(null);
+}
+
 
 module.exports = {
-    userHasInstitution: userHasInstitution
+    getMostRecentAccountsDocument : getMostRecentAccountsDocument,
+    userHasInstitution : userHasInstitution,
+    addInstitution : addInstitution
 }

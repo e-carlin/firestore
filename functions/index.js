@@ -1,3 +1,3 @@
-const addAccountFunction = require('./addAccount.js')
+const addInstitutionFunction = require('./addInstitution')
 
-exports.addAccount = addAccountFunction;
+exports.addInstitution = addInstitutionFunction;
