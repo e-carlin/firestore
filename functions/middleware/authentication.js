@@ -1,4 +1,4 @@
-var firebaseAdmin = require('../repository/initialize-firebase');
+var firebaseAdmin = require('../config/firebaseAdmin');
 
 const authorizationHeader = 'Authorization';
 

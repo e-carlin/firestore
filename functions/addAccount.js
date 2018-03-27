@@ -4,7 +4,7 @@ var camelcaseKeys = require('camelcase-keys');
 var plaid = require('plaid');
 
 var isAuthenticated = require('./middleware/authentication');
- var addAccountService = require('./service/add-account-service');
+var addAccountService = require('./service/addAccountService');
 
 const PLAID_CLIENT_ID = functions.config().plaid.clientid;
 const PLAID_SECRET = functions.config().plaid.secretkey;
@@ -12,17 +12,15 @@ const PLAID_PUBLIC_KEY = functions.config().plaid.publickey
 const PLAID_ENV = functions.config().plaid.env
 
 const app = express();
-app.use(isAuthenticated);
+// app.use(isAuthenticated); //TODO: Add this back in, removed for testing
 
 app.post('/', (req, res) => {
     let data = camelcaseKeys(req.body); //Converts snake case to camelcase
 
-    if(userHaInstitution(userId, institutionId)) {
-        res.status(200).send({message : 'User already has institution '+data.institutionName});
-    }
-    else {
-        res.send("Hello from Add Account 2. User: "+res.locals.userId);
-    }
+    addAccountService(data, res.locals.userId, () => {
+        res.sendStatus(201);
+    })
+    //TODO: Catch errors
 });
 
 exports.addAccount = functions.https.onRequest(app);
