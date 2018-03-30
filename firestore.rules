@@ -2,20 +2,18 @@
 service cloud.firestore {
   match /databases/{database}/documents {
     match /accounts/{account} {
-      allow read: if request.auth.uid != null;
-      allow write: if request.auth.uid != null;
+      allow read: if request.auth.uid == resource.data.userId;
     }
-    match /institutionTokens/{institutionToken} {
-      allow read: if false; //Clients don't need to ever read their institutionTokens
-      allow write: if request.auth.uid != null;
-    }
+    // match /institutionTokens/{institutionToken} {
+    //   //Clients don't need to do anything with institutionTokens. I think I could remove this clause
+    //   // all together but I'm leaving it hear to remind myself I've though about this
+    // }
     match /transactions/{transaction} {
-      allow read: if request.auth.uid != null;
-      allow write: if request.auth.uid != null;
+      allow read: if request.auth.uid == resource.data.userId;
     }
     match /chats/{chat} {
-      allow read: if request.auth.uid != null;
-      allow write: if request.auth.uid != null;
+      allow read: if request.auth.uid == resource.data.userId;
+      allow create: if request.auth.uid != null;
     }
   }
 }
