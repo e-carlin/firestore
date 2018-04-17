@@ -86,7 +86,7 @@ exports.chatAdded = functions.firestore
                 });
         }
         else {
-            console.log('!messageIsFromUser');
+            console.log('This message is not from user, no need to process');
             return 'This message is not from user, no need to process';
         }
     });
