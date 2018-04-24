@@ -7,11 +7,11 @@ admin.initializeApp(functions.config().firebase);
 var FieldValue = admin.firestore.FieldValue;
 var db = admin.firestore();
 var firestoreChatReply = {
-    userId: "",
-    message: "",
-    messageIsFromUser: "",
-    botHasReplied: "",
-    createdAt: ""
+    userId: null,
+    message: null,
+    messageIsFromUser: null,
+    botHasReplied: null,
+    createdAt: null
 };
 
 //Dialogflow
@@ -81,6 +81,8 @@ exports.chatAdded = functions.firestore
                     firestoreChatReply.userId = chat['userId'];
                     firestoreChatReply.message = 'Error' + JSON.stringify(err);
                     firestoreChatReply.createdAt = FieldValue.serverTimestamp();
+                    firestoreChatReply.messageIsFromUser = false;
+                    firestoreChatReply.botHasReplied = false;
                     db.collection('chats').add(firestoreChatReply)
                     return "Error processing chat";
                 });
